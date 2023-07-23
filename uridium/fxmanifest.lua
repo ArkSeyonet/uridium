@@ -27,7 +27,8 @@ server_scripts {
 }
 
 files {
-    'locales/**/*'
+    'locales/**/*',
+    'logs/**/*'
 }
 
 dependencies {

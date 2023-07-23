@@ -5,13 +5,13 @@
 
 Locale = {}
 
-Locale.Lang = json.decode(
+local lang = json.decode(
     LoadResourceFile(GetCurrentResourceName(), string.format("locales/%s.json", GetConvar("locale", "en-US")))
 )
 
 Locale.UseLocale = function(str, ...)
-    if Locale.Lang and Locale.Lang[str] then
-        return string.format(Locale.Lang[str], ...)
+    if lang and lang[str] then
+        return string.format(lang[str], ...)
     end
 
     local locale = GetConvar("locale", "en-US")

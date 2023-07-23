@@ -3,7 +3,7 @@
 --                                             by ArkSeyonet                                              --
 ------------------------------------------------------------------------------------------------------------
 
-Uridium.RegisterServerCallback('getChars', function(source, cb)
+RegisterServerCallback('getChars', function(source, cb)
     local pID = source
     local license = Players[pID]["license"]
 

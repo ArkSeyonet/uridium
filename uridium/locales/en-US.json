@@ -1,4 +1,10 @@
 {
-    "test": "hello",
-    "male": "male"
+    "connection:validating": "VALIDATING ACCOUNT",
+    "connection:noidentifiers": "ERROR FINDING IDENTIFIERS (PLEASE CONTACT ADMINISTRATOR)",
+    "connection:rejected": "CONNECTION BLOCKED (BLACKLISTED)",
+    "connection:banlog": "LOGGING CONNECTION ATTEMPT ^7[^2%s^7][^5%s^7] ^1BANNED",
+    "connection:banned": "BANNED (%s)",
+    "connection:licenseused": "LICENSE ERROR (LICENSE IN USE)",
+    "connection:fivemUsed": "FiveM ID ERROR (FIVEM ID IN USE)",
+    "connection:error": "DATA ERROR (PLEASE CONTACT ADMINISTRATOR)"
 }
