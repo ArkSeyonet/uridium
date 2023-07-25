@@ -7,6 +7,25 @@ local rejected = { license = {}, fivem = {}, endpoint = {} }
 local CreateThread = CreateThread
 local Wait = Wait
 
+---Get Player License From Server
+---@param pID integer player server id
+---@return string|nil license
+local getLicense = function(pID)
+    if not pID then return nil end
+
+    local identifiers = GetPlayerIdentifiers(pID)
+    local license
+
+    for k,v in ipairs(identifiers) do
+        if string.match(v, 'license2:') then
+            license = string.gsub(v, 'license2:', "")
+            break
+        end
+    end
+
+    return license
+end
+
 ---Get Player License, fivemid, and endpoint From Server
 ---@param pID string player server id
 ---@return string|nil license
@@ -59,57 +78,21 @@ local retrieveAccount = function(license, fivem, endpoint)
 
     local licenseData = json.decode(lData)
 
-    if licenseData["banned"] then
-        local banReason = licenseData["banReason"]
+    if licenseData.banned then
+        local banReason = licenseData.banReason
 
         if Uridium.Cfg.Debug then
-            debug(Locale("connection:rejected", licenseData["name"], license), "REJECT")
+            Debug(Locale("connection:rejected", licenseData.name, license), "REJECT")
         end
 
         rejected.license[license] = true
-        rejected.fiveM[fivem] = true
+        rejected.fivem[fivem] = true
         rejected.endpoint[endpoint] = true
 
         return true, true, banReason
     end
 
     return true, false, nil
-end
-
----Get Player License From Server
----@param pID integer player server id
----@return string|nil license
-local getLicense = function(pID)
-    if not pID then return nil end
-
-    local identifiers = GetPlayerIdentifiers(pID)
-    local license
-
-    for k,v in ipairs(identifiers) do
-        if string.match(v, 'license2:') then
-            license = string.gsub(v, 'license2:', "")
-            break
-        end
-    end
-
-    return license
-end
-
----Automatically Generate/Increment Unique Character ID
-local incrementCharID = function()
-    local id = GetResourceKvpString("incrementedCharID")
-    local nextId
-
-    if id then
-        nextId = tonumber(id)
-        nextId = nextId + 1
-    else
-        nextId = 1
-    end
-
-    SetResourceKvp("incrementedCharID", tostring(nextId))
-
-    return nextId
 end
 
 ---Check if player license is already in use
@@ -145,6 +128,23 @@ local createAccount = function(name, license, fivem, endpoint)
     if GetResourceKvpString("players:" .. license) then return true end
 
     return false
+end
+
+---Automatically Generate/Increment Unique Character ID
+local incrementCharID = function()
+    local id = GetResourceKvpString("incrementedCharID")
+    local nextId
+
+    if id then
+        nextId = tonumber(id)
+        nextId = nextId + 1
+    else
+        nextId = 1
+    end
+
+    SetResourceKvp("incrementedCharID", tostring(nextId))
+
+    return nextId
 end
 
 ---Runs Function When Client Attempts To Connect To The Server
@@ -218,4 +218,57 @@ local connectionAttempt = function(name, setKickReason, deferrals)
     deferrals.done(Locale("connection:error"))
 end
 
+local createPlayer = function(pID, license)
+    local pData = GetResourceKvpString("players:" .. license)
+
+    if pData then
+        local playerData = json.decode(pData)
+
+        Players[pID] = setmetatable({
+            name = playerData.name,
+            license = playerData.license,
+            fivem = playerData.fivem,
+            endpoint = playerData.endpoint,
+            banned = playerData.banned,
+            banReason = playerData.banReason,
+            group = playerData.group,
+            save = true
+        }, {
+            __index = {
+                getLicense = function(self) return self.license end,
+                getFiveM = function(self) return self.fivem end,
+                getEndpoint = function(self) return self.endpoint end,
+                getName = function(self) return self.name end,
+                setName = function(self, newName) self.name = newName end
+            }
+        })
+
+        if Players[pID] and Players[pID].license then return true end
+    end
+
+    return false
+end
+
 AddEventHandler("playerConnecting", connectionAttempt)
+
+RegisterNetEvent("uridium:clientLoaded", function()
+    local pID = source
+
+    if not pID then DropPlayer(pID, Locale("createplayer:error:id")) end
+
+    local license = getLicense(pID)
+
+    if not license then DropPlayer(pID, Locale("createplayer:error:license")) end
+
+    if Players[pID] then
+        DropPlayer(pID, Locale("createplayer:error:idexists"))
+    else
+        local player = createPlayer(pID, license)
+
+        if player and Players[pID] then
+            TriggerClientEvent('uridium:playerCreated', pID)
+        else
+            DropPlayer(pID, Locale("createplayer:error:unknown"))
+        end
+    end
+end)

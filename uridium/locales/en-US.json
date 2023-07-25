@@ -6,5 +6,9 @@
     "connection:banned": "BANNED (%s)",
     "connection:licenseused": "LICENSE ERROR (LICENSE IN USE)",
     "connection:fivemUsed": "FiveM ID ERROR (FIVEM ID IN USE)",
-    "connection:error": "DATA ERROR (PLEASE CONTACT ADMINISTRATOR)"
+    "connection:error": "DATA ERROR (PLEASE CONTACT ADMINISTRATOR)",
+    "createplayer:error:id": "ERROR CREATING PLAYER: ID (PLEASE CONTACT ADMINISTRATOR)",
+    "createplayer:error:license": "ERROR CREATING PLAYER: LICENSE (PLEASE CONTACT ADMINISTRATOR)",
+    "createplayer:error:idexists": "ERROR CREATING PLAYER: ID EXISTS (PLEASE CONTACT ADMINISTRATOR)",
+    "createplayer:error:unknown": "ERROR CREATING PLAYER: UNKNOWN (PLEASE CONTACT ADMINISTRATOR)"
 }

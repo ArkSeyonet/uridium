@@ -5,7 +5,7 @@
 
 RegisterServerCallback('getChars', function(source, cb)
     local pID = source
-    local license = Players[pID]["license"]
+    local license = Players[pID].license
 
     if license then
         local result = DB.GetCharacters(license)
