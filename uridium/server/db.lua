@@ -1,8 +1,3 @@
-------------------------------------------------------------------------------------------------------------
---                                          uridium/server/db.lua                                         --
---                                             by ArkSeyonet                                              --
-------------------------------------------------------------------------------------------------------------
-
 DB = {}
 
 local MySQL = MySQL
@@ -16,7 +11,7 @@ local UPDATE_CHAR
 ---@param license string
 ---@return function
 DB.GetChars = function(license)
-    return MySQL.rawExecute.await(GET_CHARS, { license })
+  return MySQL.rawExecute.await(GET_CHARS, { license })
 end
 
 ---Prepared Statement To Create A New Character

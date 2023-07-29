@@ -5,33 +5,30 @@ use_experimental_fxv2_oal 'yes'
 lua54 'yes'
 
 --[[ Resource Manifest ]]--
-name 'Uridium Toolkit'
-version '0.0.1'
+name 'Uridium Toolkit - Characters'
 author 'ArkSeyonet'
 repository 'https://github.com/arkseyonet/uridium'
 
---[[ File Manifest ]]--
-shared_scripts { 
+shared_scripts {
   '@uridium_lib/init.lua',
   'shared/main.lua'
 }
 
 client_script { 'client/main.lua' }
 
-server_scripts {
-  '@oxmysql/lib/MySQL.lua',
-  'server/db.lua',
-  'server/main.lua',
-  'server/callbacks.lua'
-}
+-- server_scripts {}
 
-files {
-  'locales/**/*',
-  'logs/**/*'
-}
+-- ui_page {
+-- 	'html/index.html'
+-- }
+
+-- files {
+--   'html/**/*'
+-- }
 
 dependencies {
-  '/onesync',
+  'spawnmanager',
   'oxmysql',
-  'spawnmanager'
+  'uridium_lib',
+  'uridium'
 }

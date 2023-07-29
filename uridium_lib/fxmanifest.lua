@@ -11,19 +11,21 @@ repository 'https://github.com/arkseyonet/uridium'
 
 --[[ File Manifest ]]--
 shared_script {
-    'init.lua',
-    'shared/debug.lua',
-    'shared/locale.lua',
-    'shared/interval.lua'
+  'init.lua',
+  'shared/debug.lua',
+  'shared/locale.lua',
+  'shared/interval.lua'
 }
 
-client_scripts {}
+client_scripts {
+  'client/model.lua'
+}
 
 files {
-    'init.lua',
-    'shared/**/*'
+  'init.lua',
+  'shared/**/*'
 }
 
 dependencies {
-    '/onesync'
+  '/onesync'
 }
