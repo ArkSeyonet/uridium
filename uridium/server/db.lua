@@ -1,5 +1,6 @@
 DB = {}
 
+---@diagnostic disable-next-line: undefined-global
 local MySQL = MySQL
 local GET_CHARS = 'SELECT * FROM `characters` WHERE `license` = ?'
 local CREATE_CHAR

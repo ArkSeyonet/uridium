@@ -252,8 +252,8 @@ end
 AddEventHandler("playerConnecting", connectionAttempt)
 
 --- Register Server Callback
----@param name string - name of callback <example: cb:lsd-skin:save>
----@param cb function - callback
+---@param name string name of callback <example: cb:lsd-skin:save>
+---@param cb function callback
 RegisterServerCallback = function(name, cb)
 	Callbacks["cb:" .. name] = cb
 end
