@@ -1,0 +1,212 @@
+@font-face { font-family: Montserrat-Bold; src: url('fonts/Montserrat-Bold.ttf'); }
+@font-face { font-family: Roboto-Bold; src: url('fonts/Roboto-Bold.ttf'); }
+@font-face { font-family: LEMONMILK-Bold; src: url('fonts/LEMONMILK-Bold.otf'); }
+
+body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  font-family: 'Montserrat-Bold', sans-serif;
+  font-size: x-large;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  overflow: hidden;
+}
+
+.blackscreen {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #000000;
+  background-size: stretch;
+  z-index: 1;
+  opacity: 1.0;
+}
+
+.background {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url(./background.png);
+  background-size: contain;
+  z-index: 2;
+  opacity: 0.0;
+}
+
+.character-container {
+  position: absolute;
+  top: 30vh;
+  left: 2vw;
+  height: 40vh;
+  width: 96vw;
+  z-index: 3;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.new-card {
+  position: relative;
+  flex-basis: 50%;
+  height: 35vh;
+  width: 17.2vw;
+  min-width: 17.2vw;
+  max-width: 17.2vw;
+  background-image: linear-gradient(to bottom right, rgba(0, 25, 75, 0.9), rgba(50, 25, 0, 0.9));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 4;
+  border-radius: 5px;
+}
+
+.new-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 0, 255, 0.7);
+}
+
+.new-button:hover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 0, 255, 0.9);
+}
+
+.new-button:active {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.character-card {
+  flex-basis: 50%;
+  min-height: 35vh;
+  max-height: 35vh;
+  height: 35vh;
+  width: 17.2vw;
+  min-width: 17.2vw;
+  max-width: 17.2vw;
+  background-image: linear-gradient(to bottom right, rgba(0, 25, 75, 0.9), rgba(50, 25, 0, 0.9));
+  display: flex;
+  flex-direction: column;
+  z-index: 4;
+  align-items: center;
+  border-radius: 5px;
+  padding-top: 2vh;
+}
+
+.character-card :not(:first-child) {
+  margin-top: 1vh;
+}
+
+.char-id-label {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  width: 50%;
+  margin-bottom: -1vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.char-id {
+  font-weight: bold;
+  color: rgba(0, 255, 255, 0.8);
+}
+
+.name-label {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  width: 50%;
+  margin-bottom: -1vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.name {
+  font-weight: bold;
+  color: rgba(0, 255, 255, 0.8);
+}
+
+.gender-label {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  width: 50%;
+  margin-bottom: -1vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.gender {
+  font-weight: bold;
+  color: rgba(0, 255, 255, 0.8);
+}
+
+.dob-label {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  width: 50%;
+  margin-bottom: -1vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.dob {
+  font-weight: bold;
+  color: rgba(0, 255, 255, 0.8);
+}
+
+.last-played-label {
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  width: 50%;
+  margin-bottom: -1vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.last-played {
+  font-weight: bold;
+  color: rgba(0, 255, 255, 0.8);
+}
+
+.play-delete-container {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-around;
+  width: 90%;
+}
+
+.play-button {
+  align-self: flex-end;
+  color: rgba(0, 255, 0, 0.7);
+}
+
+.play-button:hover {
+  align-self: flex-end;
+  color: rgba(0, 255, 0, 0.9);
+}
+
+.play-button:active {
+  align-self: flex-end;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.delete-button {
+  color: rgba(255, 0, 0, 0.7);
+}
+
+.delete-button:hover {
+  color: rgba(255, 0, 0, 0.9);
+}
+
+.delete-button:active {
+  color: rgba(255, 255, 255, 0.9);
+}

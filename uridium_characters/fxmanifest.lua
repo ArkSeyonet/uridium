@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 --[[ FX Manifest ]]--
 fx_version 'cerulean'
 game 'gta5'
@@ -14,21 +15,19 @@ shared_scripts {
   'shared/main.lua'
 }
 
-client_script { 'client/main.lua' }
+client_scripts { 
+  'client/main.lua'
+}
 
--- server_scripts {}
+ui_page {
+	'data/html/index.html'
+}
 
--- ui_page {
--- 	'html/index.html'
--- }
-
--- files {
---   'html/**/*'
--- }
+files {
+  'data/html/**/*'
+}
 
 dependencies {
   'spawnmanager',
-  'oxmysql',
-  'uridium_lib',
-  'uridium'
+  'oxmysql'
 }

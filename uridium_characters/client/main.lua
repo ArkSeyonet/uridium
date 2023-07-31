@@ -1,55 +1,69 @@
 Model = Lib.Module("client", "model")
 
-local function setupChars()
+local function init()
   local data = exports.uridium:callback('getChars')
 
-  if not data or not next(data) then
-    -- Do stuff without existing characters
-  else
-    -- Do stuff with existing characters
-  end
-
-  local ped = PlayerPedId()
-
-  repeat
-    ped = PlayerPedId()
-    Wait(10)
-  until ped ~= nil
-
-  SetEntityVisible(ped, false, false)
-  NetworkSetEntityInvisibleToNetwork(ped, false)
+  StartAudioScene("MP_LEADERBOARD_SCENE")
 
   exports.spawnmanager:forceRespawn()
 
-  local spawnpoint = Characters.StartingSpawn
-  local skin = Characters.DefaultSkin
   local playerSpawned = false
 
   repeat
-    exports.spawnmanager:spawnPlayer(spawnpoint, function(spawned)
-      if spawned then
-        playerSpawned = true
-        SetEntityVisible(PlayerPedId(), false, false)
-      end
-    end)
+      exports.spawnmanager:spawnPlayer(Characters.StartingSpawn, function(spawned)
+          if spawned then	playerSpawned = true end
+      end)
 
-    Wait(500)
+      Wait(500)
   until playerSpawned
 
-  if Model.LoadSkin(skin, false, true) then
-    -- TODO: setPlayerLoaded export
-    ped = PlayerPedId()
-    SetEntityVisible(ped, true, false)
-    NetworkSetEntityInvisibleToNetwork(ped, true)
+  if not IsPlayerSwitchInProgress() then
+    SwitchOutPlayer(PlayerPedId(), 0, 1)
   end
 
-  return true
+  local characters = {
+    {
+      charid = 1,
+      license = "x",
+      firstname = "John",
+      lastname="Doe",
+      gender="male",
+      dateofbirth="01/01/1990",
+      lastPlayed="8:00 PM 07/25/2023"
+    },
+    { 
+      charid = 2,
+      license = "x",
+      firstname = "Jane",
+      lastname="Doe",
+      gender="female",
+      dateofbirth="01/01/1990",
+      lastPlayed="8:00 PM 07/25/2023"
+    },
+  }
+
+  -- if data and data[1] then
+  --   print(true)
+
+  --   for k,v in pairs(data) do
+  --     print("K: " .. tostring(k))
+  --     print("V:" .. tostring(v))
+  --   end
+
+  --   --TODO: Setup Existing Characters
+  -- else
+  --   SendNUIMessage({ eventName = 'uridium_characters:start'})
+  --   SendNUIMessage({ eventName = 'uridium_characters:new'})
+  -- end
+
+  local switchState
+
+  repeat
+    switchState = GetPlayerSwitchState()
+    Wait(500)
+  until switchState == 5
 end
 
-AddEventHandler('uridium:chars:init', function()
-  local setup = setupChars()
-
-  if setup then
-
-  end
+RegisterNetEvent('uridium_characters:start', function()
+  init()
 end)

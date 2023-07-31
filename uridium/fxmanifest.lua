@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 --[[ FX Manifest ]]--
 fx_version 'cerulean'
 game 'gta5'

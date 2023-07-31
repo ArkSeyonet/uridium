@@ -1,5 +1,5 @@
 # Main Files
+.vscode
+/.vscode/*
 .editorconfig
 .prettierrc
-/.vscode
-/.vscode/*

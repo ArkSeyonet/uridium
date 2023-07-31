@@ -1,5 +1,6 @@
-Players, Buckets, Callbacks = {}, {}, {}
+Players, Buckets = {}, {}
 
+local callbacks = {}
 local TriggerClientEvent = TriggerClientEvent
 local RegisterNetEvent = RegisterNetEvent
 
@@ -251,37 +252,6 @@ end
 
 AddEventHandler("playerConnecting", connectionAttempt)
 
---- Register Server Callback
----@param name string name of callback <example: cb:lsd-skin:save>
----@param cb function callback
-RegisterServerCallback = function(name, cb)
-	Callbacks["cb:" .. name] = cb
-end
-
----Trigger Server Callback
----@param name string
----@param source integer
----@param cb function
----@param ... any
-TriggerServerCallback = function(name, source, cb, ...)
-	if Callbacks[name] then Callbacks[name](source, cb, ...) end
-end
-
----Register Event For Triggering Server Callback (YOU SHOULD NOT INTERACT WITH THIS DIRECTLY)
----@param name string
----@param ... any
-RegisterNetEvent('triggerServerCallback', function(name, ...)
-  local pID = source
-
-	TriggerServerCallback(name, pID, function(...)
-    if Uridium.Cfg.Debug then
-      Debug(Locale("uridium:callback", pID, name), "callback")
-    end
-
-    TriggerClientEvent(name, pID, ...)
-  end, ...)
-end)
-
 RegisterNetEvent("uridium:clientLoaded", function()
   local pID = source
 
@@ -297,7 +267,7 @@ RegisterNetEvent("uridium:clientLoaded", function()
     local player = createPlayer(pID, license)
 
     if player and Players[pID] then
-      TriggerClientEvent('uridium:playerCreated', pID)
+      TriggerClientEvent('uridium_characters:start', pID)
     else
       DropPlayer(pID, Locale("createplayer:error:unknown"))
     end
