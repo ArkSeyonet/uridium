@@ -1,212 +1,554 @@
-@font-face { font-family: Montserrat-Bold; src: url('fonts/Montserrat-Bold.ttf'); }
+@font-face { font-family: NeoncityDisplay; src: url('fonts/NeoncityDisplay-MVVLv.otf'); }
+@font-face { font-family: NeoncityScript; src: url('fonts/NeoncityScript-K77Je.otf'); }
+@font-face { font-family: LemonMilk-Regular; src: url('fonts/LEMONMILK-Regular.otf'); }
+@font-face { font-family: LemonMilk-RegularItalic; src: url('fonts/LEMONMILK-RegularItalic.otf'); }
+@font-face { font-family: LemonMilk-Medium; src: url('fonts/LEMONMILK-Medium.otf'); }
+@font-face { font-family: LemonMilk-Bold; src: url('fonts/LEMONMILK-Bold.otf'); }
+@font-face { font-family: Vampire-Wars; src: url('fonts/Vampire-Wars.ttf'); }
 @font-face { font-family: Roboto-Bold; src: url('fonts/Roboto-Bold.ttf'); }
-@font-face { font-family: LEMONMILK-Bold; src: url('fonts/LEMONMILK-Bold.otf'); }
+@font-face { font-family: retrolined; src: url('fonts/retrolined.ttf'); }
+@font-face { font-family: ChaletComprime-CologneSixty; src: url('fonts/ChaletComprime-CologneSixty.ttf'); }
+@font-face { font-family: Chalet-LondonNineteenSixty-Regular; src: url('fonts/Chalet-LondonNineteenSixty-Regular.otf'); }
 
-body {
+html, body {
   height: 100vh;
   width: 100vw;
   margin: 0;
-  font-family: 'Montserrat-Bold', sans-serif;
-  font-size: x-large;
-  color: white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   overflow: hidden;
-}
-
-.blackscreen {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: #000000;
-  background-size: stretch;
-  z-index: 1;
-  opacity: 1.0;
-}
-
-.background {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: url(./background.png);
+  background-image: url('background-backup2.png');
   background-size: contain;
-  z-index: 2;
-  opacity: 0.0;
+  background-repeat: no-repeat;
 }
 
-.character-container {
+.main-container {
   position: absolute;
-  top: 30vh;
-  left: 2vw;
-  height: 40vh;
-  width: 96vw;
-  z-index: 3;
+  top: 0vh;
+  left: 0vw;
+  height: 100vh;
+  width: 100vw;
+  transition-property: opacity;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+}
+
+.character-cards {
+  position: absolute;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.new-card {
-  position: relative;
-  flex-basis: 50%;
-  height: 35vh;
-  width: 17.2vw;
-  min-width: 17.2vw;
-  max-width: 17.2vw;
-  background-image: linear-gradient(to bottom right, rgba(0, 25, 75, 0.9), rgba(50, 25, 0, 0.9));
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 4;
-  border-radius: 5px;
-}
-
-.new-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 0, 255, 0.7);
-}
-
-.new-button:hover {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 0, 255, 0.9);
-}
-
-.new-button:active {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, 0.9);
+  flex-direction: row;
+  justify-content: space-evenly;
+  left: 0vw;
+  top: 35vh;
+  height: 30vh;
+  width: 100vw;
+  transition-property: opacity;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
 }
 
 .character-card {
-  flex-basis: 50%;
-  min-height: 35vh;
-  max-height: 35vh;
-  height: 35vh;
-  width: 17.2vw;
-  min-width: 17.2vw;
-  max-width: 17.2vw;
-  background-image: linear-gradient(to bottom right, rgba(0, 25, 75, 0.9), rgba(50, 25, 0, 0.9));
+  height: 30vh;
+  width: 20vw;
+  border-radius: 0.5vh;
+  overflow: hidden;
+}
+
+.character-card-info {
   display: flex;
   flex-direction: column;
-  z-index: 4;
+  justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  padding-top: 2vh;
+  height: 22vh;
+  width: 20vw;
+  user-select: none;
 }
 
-.character-card :not(:first-child) {
-  margin-top: 1vh;
+.character-card-label {
+  font-family: var(--character-card-label-font);
+  font-size: 1.5vh;
+  text-decoration: underline;
+  color: var(--clr-character-card-label);
 }
 
-.char-id-label {
-  font-weight: bold;
-  font-size: large;
-  text-align: center;
-  width: 50%;
-  margin-bottom: -1vh;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+.character-card-field {
+  font-family: var(--character-card-field-font);
+  font-size: 2vh;
+  margin-bottom: 1.95vh;
 }
 
-.char-id {
-  font-weight: bold;
-  color: rgba(0, 255, 255, 0.8);
-}
-
-.name-label {
-  font-weight: bold;
-  font-size: large;
-  text-align: center;
-  width: 50%;
-  margin-bottom: -1vh;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-}
-
-.name {
-  font-weight: bold;
-  color: rgba(0, 255, 255, 0.8);
-}
-
-.gender-label {
-  font-weight: bold;
-  font-size: large;
-  text-align: center;
-  width: 50%;
-  margin-bottom: -1vh;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-}
-
-.gender {
-  font-weight: bold;
-  color: rgba(0, 255, 255, 0.8);
-}
-
-.dob-label {
-  font-weight: bold;
-  font-size: large;
-  text-align: center;
-  width: 50%;
-  margin-bottom: -1vh;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-}
-
-.dob {
-  font-weight: bold;
-  color: rgba(0, 255, 255, 0.8);
-}
-
-.last-played-label {
-  font-weight: bold;
-  font-size: large;
-  text-align: center;
-  width: 50%;
-  margin-bottom: -1vh;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
-}
-
-.last-played {
-  font-weight: bold;
-  color: rgba(0, 255, 255, 0.8);
-}
-
-.play-delete-container {
-  margin-top: auto;
+.character-card-buttons {
   display: flex;
-  justify-content: space-around;
-  width: 90%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 8vh;
+  width: 20vw;
 }
 
 .play-button {
-  align-self: flex-end;
-  color: rgba(0, 255, 0, 0.7);
-}
-
-.play-button:hover {
-  align-self: flex-end;
-  color: rgba(0, 255, 0, 0.9);
-}
-
-.play-button:active {
-  align-self: flex-end;
-  color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  height: 3vh;
+  width: 20vw;
+  font-family: 'Roboto-Bold';
+  font-size: 2vh;
 }
 
 .delete-button {
-  color: rgba(255, 0, 0, 0.7);
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  height: 3vh;
+  width: 20vw;
+  font-family: 'Roboto-Bold';
+  font-size: 2vh;
 }
 
-.delete-button:hover {
-  color: rgba(255, 0, 0, 0.9);
+.character-card-new {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  width: 20vw;
+  font-family: 'Roboto-Bold';
+  font-size: 2vh;
 }
 
-.delete-button:active {
-  color: rgba(255, 255, 255, 0.9);
+.create-cards {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  left: 0vw;
+  top: 31vh;
+  height: 38vh;
+  width: 100vw;
+  visibility: hidden;
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 100ms;
+  transition-timing-function: linear;
+}
+
+.create-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 38vh;
+  width: 23vw;
+  border-radius: 0.5vh;
+  overflow: hidden;
+}
+
+.create-card-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  width: 30vw;
+  margin-top: 1vh;
+}
+
+.form-label {
+  font-family: var(--create-card-form-label-font);
+  font-size: 1.5vh;
+  margin-bottom: 0.25vh;
+  color: var(--clr-create-card-form-label);
+}
+
+input {
+  height: 2.5vh;
+  width: 20vw;
+  text-align: center;
+  margin-bottom: 1vh;
+  font-family: var(--create-card-form-input-font);
+  font-size: 2vh;
+  border-radius: 0.5vh;
+}
+
+select {
+  height: 2.8vh;
+  width: 20.3vw;
+  text-align: center;
+  appearance: none;
+  margin-bottom: 1vh;
+  font-family: var(--create-card-form-select-font);
+  font-size: 2vh;
+  border-radius: 0.5vh;
+}
+
+.create-card-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 8vh;
+  width: 30vw;
+}
+
+.create-card-submit {
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  height: 3vh;
+  width: 5vw;
+  font-family: 'Roboto-Bold';
+  font-size: 2vh;
+}
+
+.create-card-cancel {
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  width: 5vw;
+  font-family: 'Roboto-Bold';
+  font-size: 2vh;
+}
+
+#character-card-1-name-field,
+#character-card-1-gender-field,
+#character-card-1-dob-field,
+#firstname-1,
+#lastname-1,
+#gender-1,
+#dob-1 {
+  color: var(--clr-card-1-field);
+}
+
+#character-card-2-name-field,
+#character-card-2-gender-field,
+#character-card-2-dob-field,
+#firstname-2,
+#lastname-2,
+#gender-2,
+#dob-2 {
+  color: var(--clr-card-2-field);
+}
+
+#character-card-3-name-field,
+#character-card-3-gender-field,
+#character-card-3-dob-field,
+#firstname-3,
+#lastname-3,
+#gender-3,
+#dob-3 {
+  color: var(--clr-card-3-field);
+}
+
+#character-card-4-name-field,
+#character-card-4-gender-field,
+#character-card-4-dob-field,
+#firstname-4,
+#lastname-4,
+#gender-4,
+#dob-4 {
+  color: var(--clr-card-4-field);
+}
+
+#character-card-1-new {
+  color: var(--clr-card-1-new);
+}
+
+#character-card-1-new:hover {
+  color: var(--clr-card-1-new-hover);
+}
+
+#character-card-1-new:active {
+  color: var(--clr-card-1-new-active);
+}
+
+#character-card-2-new {
+  color: var(--clr-card-2-new);
+}
+
+#character-card-2-new:hover {
+  color: var(--clr-card-2-new-hover);
+}
+
+#character-card-2-new:active {
+  color: var(--clr-card-2-new-active);
+}
+
+#character-card-3-new {
+  color: var(--clr-card-3-new);
+}
+
+#character-card-3-new:hover {
+  color: var(--clr-card-3-new-hover);
+}
+
+#character-card-3-new:active {
+  color: var(--clr-card-3-new-active);
+}
+
+#character-card-4-new {
+  color: var(--clr-card-4-new);
+}
+
+#character-card-4-new:hover {
+  color: var(--clr-card-4-new-hover);
+}
+
+#character-card-4-new:active {
+  color: var(--clr-card-4-new-active);
+}
+
+#character-card-1,
+#create-card-1 {
+  background: var(--clr-card-1-bg);
+  border: var(--clr-card-1-border);
+}
+
+#character-card-2,
+#create-card-2 {
+  background: var(--clr-card-2-bg);
+  border: var(--clr-card-2-border);
+}
+
+#character-card-3,
+#create-card-3 {
+  background: var(--clr-card-3-bg);
+  border: var(--clr-card-3-border);
+}
+
+#character-card-4,
+#create-card-4 {
+  background: var(--clr-card-4-bg);
+  border: var(--clr-card-4-border);
+}
+
+#firstname-1,
+#lastname-1,
+#gender-1,
+#dob-1 {
+  background: var(--clr-create-card-input-bg);
+  border: var(--clr-card-1-border);
+}
+
+#firstname-2,
+#lastname-2,
+#gender-2,
+#dob-2 {
+  background: var(--clr-create-card-input-bg);
+  border: var(--clr-card-2-border);
+}
+
+#firstname-3,
+#lastname-3,
+#gender-3,
+#dob-3 {
+  background: var(--clr-create-card-input-bg);
+  border: var(--clr-card-3-border);
+}
+
+#firstname-4,
+#lastname-4,
+#gender-4,
+#dob-4 {
+  background: var(--clr-create-card-input-bg);
+  border: var(--clr-card-4-border);
+}
+
+#play-button-1 {
+  color: var(--clr-play-button-1);
+}
+
+#play-button-1:hover {
+  color: var(--clr-play-button-1-hover);
+}
+
+#play-button-1:active {
+  color: var(--clr-play-button-1-active);
+}
+
+#play-button-2 {
+  color: var(--clr-play-button-2);
+}
+
+#play-button-2:hover {
+  color: var(--clr-play-button-2-hover);
+}
+
+#play-button-2:active {
+  color: var(--clr-play-button-2-active);
+}
+
+#play-button-3 {
+  color: var(--clr-play-button-3);
+}
+
+#play-button-3:hover {
+  color: var(--clr-play-button-3-hover);
+}
+
+#play-button-3:active {
+  color: var(--clr-play-button-3-active);
+}
+
+#play-button-4 {
+  color: var(--clr-play-button-4);
+}
+
+#play-button-4:hover {
+  color: var(--clr-play-button-4-hover);
+}
+
+#play-button-4:active {
+  color: var(--clr-play-button-4-active);
+}
+
+#delete-button-1 {
+  color: var(--clr-delete-button-1);
+}
+
+#delete-button-1:hover {
+  color: var(--clr-delete-button-1-hover);
+}
+
+#delete-button-1:active {
+  color: var(--clr-delete-button-1-active);
+}
+
+#delete-button-2 {
+  color: var(--clr-delete-button-2);
+}
+
+#delete-button-2:hover {
+  color: var(--clr-delete-button-2-hover);
+}
+
+#delete-button-2:active {
+  color: var(--clr-delete-button-2-active);
+}
+
+#delete-button-3 {
+  color: var(--clr-delete-button-3);
+}
+
+#delete-button-3:hover {
+  color: var(--clr-delete-button-3-hover);
+}
+
+#delete-button-3:active {
+  color: var(--clr-delete-button-3-active);
+}
+
+#delete-button-4 {
+  color: var(--clr-delete-button-4);
+}
+
+#delete-button-4:hover {
+  color: var(--clr-delete-button-4-hover);
+}
+
+#delete-button-4:active {
+  color: var(--clr-delete-button-4-active);
+}
+
+
+#create-card-1-submit {
+  color: var(--clr-create-card-1-submit);
+}
+
+#create-card-1-submit:hover {
+  color: var(--clr-create-card-1-submit-hover);
+}
+
+#create-card-1-submit:active {
+  color: var(--clr-create-card-1-submit-active);
+}
+
+#create-card-2-submit {
+  color: var(--clr-create-card-2-submit);
+}
+
+#create-card-2-submit:hover {
+  color: var(--clr-create-card-2-submit-hover);
+}
+
+#create-card-2-submit:active {
+  color: var(--clr-create-card-2-submit-active);
+}
+
+#create-card-3-submit {
+  color: var(--clr-create-card-3-submit);
+}
+
+#create-card-3-submit:hover {
+  color: var(--clr-create-card-3-submit-hover);
+}
+
+#create-card-3-submit:active {
+  color: var(--clr-create-card-3-submit-active);
+}
+
+#create-card-4-submit {
+  color: var(--clr-create-card-4-submit);
+}
+
+#create-card-4-submit:hover {
+  color: var(--clr-create-card-4-submit-hover);
+}
+
+#create-card-4-submit:active {
+  color: var(--clr-create-card-4-submit-active);
+}
+
+#create-card-1-cancel {
+  color: var(--clr-create-card-1-cancel);
+}
+
+#create-card-1-cancel:hover {
+  color: var(--clr-create-card-1-cancel-hover);
+}
+
+#create-card-1-cancel:active {
+  color: var(--clr-create-card-1-cancel-active);
+}
+
+#create-card-2-cancel {
+  color: var(--clr-create-card-2-cancel);
+}
+
+#create-card-2-cancel:hover {
+  color: var(--clr-create-card-2-cancel-hover);
+}
+
+#create-card-2-cancel:active {
+  color: var(--clr-create-card-2-cancel-active);
+}
+
+#create-card-3-cancel {
+  color: var(--clr-create-card-3-cancel);
+}
+
+#create-card-3-cancel:hover {
+  color: var(--clr-create-card-3-cancel-hover);
+}
+
+#create-card-3-cancel:active {
+  color: var(--clr-create-card-3-cancel-active);
+}
+
+#create-card-4-cancel {
+  color: var(--clr-create-card-4-cancel);
+}
+
+#create-card-4-cancel:hover {
+  color: var(--clr-create-card-4-cancel-hover);
+}
+
+#create-card-4-cancel:active {
+  color: var(--clr-create-card-4-cancel-active);
 }

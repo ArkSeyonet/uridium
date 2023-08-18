@@ -1,178 +1,273 @@
-// const resource = GetParentResourceName();
-const blackscreen = $('#blackscreen');
-const background = $('#background');
-const characterContainer = document.getElementById('character-container');
+// @app
+window.app = {}
+
+const blkscrn = document.getElementById('blackscreen');
+const container = document.getElementById('main-container');
+const charCards = document.getElementById('character-cards');
+const createCards = document.getElementById('create-cards');
 const audio = $('#audio').get(0);
+const numbers = /[0-9]/;
+const symbols = /[`!@#$%^&*()_\-+=\[\]{};':'\\|,.<>\/?~ ]/;
+const dateSymbols = /[`!@#$%^&*()_\-+=\[\]{};':'\\|,.<>\?~ ]/;
+const regex = /[^\u000-\u00ff]/;
+const genderMap = ['Male', 'Female', 'Non-Binary'];
 
-// const charData = [
-//   {
-//     charid: 1,
-//     license: 'x',
-//     firstname: 'John',
-//     lastname: 'Doe',
-//     gender: 'Male',
-//     dateofbirth: '01/01/1990',
-//     lastPlayed: '8:00 PM 07/25/2023'
-//   },
-//   {
-//     charid: 2,
-//     license: 'x',
-//     firstname: 'Jane',
-//     lastname: 'Doe',
-//     gender: 'Female',
-//     dateofbirth: '01/01/1990',
-//     lastPlayed: '8:00 PM 07/25/2023'
-//   }
-// ];
+let validCheck = { 'firstname': false, 'lastname': false, 'gender': 'Male', 'dateofbirth': false };
 
-let characterIDs = [];
+let charData = [
+  { cid: 1, firstname: 'John', lastname: 'Doe', gender: 'Male', dateofbirth: '01/01/1990' },
+  { cid: 2, firstname: 'James', lastname: 'Doe', gender: 'Non-Binary', dateofbirth: '01/01/1955' },
+  { cid: 3, firstname: 'Jane', lastname: 'Doe', gender: 'Female', dateofbirth: '01/01/1990' }
+];
 
-function fadeInBackground() {
-  window.requestAnimationFrame(() => {
-    background.css({
-      'opacity': '1.0',
-      'transition': 'all 2.5s ease-in-out'
-    });
-  });
-}
+async function generateCards(charData) {
+  let count = 0;
 
-function fadeOutBackground() {
-  window.requestAnimationFrame(() => {
-    background.css({
-      'opacity': '0.0',
-      'transition': 'all 2.5s ease-in-out'
-    });
-  });
-}
-
-function fadeInBlackscreen() {
-  window.requestAnimationFrame(() => {
-    blackscreen.css({
-      'opacity': '1.0',
-      'transition': 'all 2.5s ease-in-out'
-    });
-  });
-}
-
-function fadeOutBlackscreen() {
-  window.requestAnimationFrame(() => {
-    blackscreen.css({
-      'opacity': '0.0',
-      'transition': 'all 2.5s ease-in-out'
-    });
-  });
-}
-
-function createNewCard() {
-  let newDiv = document.createElement('new-card');
-  newDiv.setAttribute('id', 'new-button');
-  newDiv.classList.add('new-card');
-
-  let newButton = document.createElement('newButton');
-  newButton.textContent = 'CREATE';
-  newButton.classList.add('new-button');
-
-  newDiv.appendChild(newButton);
-  characterContainer.append(newDiv);
-}
-
-function createExistingCards(charData) {
   charData.forEach((character) => {
-    let characterDiv = document.createElement('div');
-    let characterID = 'character-' + character.charid;
-    characterDiv.classList.add('character-card');
-    characterDiv.setAttribute('id', characterID);
-    characterIDs.push(characterID);
+    count++;
+    let value = count;
 
-    let charIDLabelElem = document.createElement('charIDLabel');
-    charIDLabelElem.textContent = 'ID';
-    charIDLabelElem.classList.add('char-id-label');
+    let charCard = document.createElement('character-card');
+    charCard.setAttribute('id', 'character-card-' + value);
+    charCard.classList.add('character-card');
 
-    let charIDElem = document.createElement('charID');
-    charIDElem.textContent = character.charid;
-    charIDElem.classList.add('char-id');
+    let charCardInfo = document.createElement('character-card-info');
+    charCardInfo.classList.add('character-card-info');
 
-    let nameLabel = document.createElement('nameLabel');
-    nameLabel.textContent = 'NAME';
-    nameLabel.classList.add('name-label');
+    let charCardNameLabel = document.createElement('character-card-label');
+    charCardNameLabel.classList.add('character-card-label');
+    charCardNameLabel.textContent = 'NAME';
 
-    let name = document.createElement('name');
-    name.textContent = character.firstname + ' ' + character.lastname;
-    name.classList.add('name');
+    let charCardName = document.createElement('character-card-field');
+    charCardName.setAttribute('id', 'character-card-' + value + '-name-field');
+    charCardName.classList.add('character-card-field');
+    charCardName.textContent = character.firstname + ' ' + character.lastname;
 
-    let genderLabel = document.createElement('genderLabel');
-    genderLabel.textContent = 'GENDER';
-    genderLabel.classList.add('gender-label');
+    let charCardGenderLabel = document.createElement('character-card-label');
+    charCardGenderLabel.classList.add('character-card-label');
+    charCardGenderLabel.textContent = 'GENDER';
 
-    let gender = document.createElement('gender');
-    gender.textContent = character.gender;
-    gender.classList.add('gender');
+    let charCardGender = document.createElement('character-card-field');
+    charCardGender.setAttribute('id', 'character-card-' + value + '-gender-field');
+    charCardGender.classList.add('character-card-field');
+    charCardGender.textContent = character.gender;
 
-    let dobLabel = document.createElement('dobLabel');
-    dobLabel.textContent = 'DOB';
-    dobLabel.classList.add('dob-label');
+    let charCardDOBLabel = document.createElement('character-card-label');
+    charCardDOBLabel.classList.add('character-card-label');
+    charCardDOBLabel.textContent = 'DATE OF BIRTH';
 
-    let dob = document.createElement('dob');
-    dob.textContent = character.dateofbirth;
-    dob.classList.add('dob');
+    let charCardDOB = document.createElement('character-card-field');
+    charCardDOB.setAttribute('id', 'character-card-' + value + '-dob-field');
+    charCardDOB.classList.add('character-card-field');
+    charCardDOB.textContent = character.dateofbirth;
 
-    let lastPlayedLabel = document.createElement('lastPlayedLabel');
-    lastPlayedLabel.textContent = 'LAST PLAYED';
-    lastPlayedLabel.classList.add('last-played-label');
+    charCardInfo.appendChild(charCardNameLabel);
+    charCardInfo.appendChild(charCardName);
+    charCardInfo.appendChild(charCardGenderLabel);
+    charCardInfo.appendChild(charCardGender);
+    charCardInfo.appendChild(charCardDOBLabel);
+    charCardInfo.appendChild(charCardDOB);
 
-    let lastPlayed = document.createElement('lastPlayed');
-    lastPlayed.textContent = character.lastPlayed;
-    lastPlayed.classList.add('last-played');
+    charCard.appendChild(charCardInfo);
 
-    let playDeleteContainer = document.createElement('playDeleteContainer');
-    playDeleteContainer.classList.add('play-delete-container');
+    let charCardButtons = document.createElement('character-card-buttons');
+    charCardButtons.classList.add('character-card-buttons');
 
-    let playButton = document.createElement('playButton');
-    playButton.textContent = 'PLAY';
+    let playButton = document.createElement('play-button');
+    playButton.setAttribute('id', 'play-button-' + value);
     playButton.classList.add('play-button');
-    playButton.setAttribute('charid', character.charid);
+    playButton.textContent = 'PLAY';
 
-    let deleteButton = document.createElement('deleteButton');
-    deleteButton.textContent = 'DELETE';
+    let deleteButton = document.createElement('delete-button');
+    deleteButton.setAttribute('id', 'delete-button-' + value);
     deleteButton.classList.add('delete-button');
+    deleteButton.textContent = 'DELETE';
 
-    characterDiv.appendChild(charIDLabelElem);
-    characterDiv.appendChild(charIDElem);
-    characterDiv.appendChild(nameLabel);
-    characterDiv.appendChild(name);
-    characterDiv.appendChild(genderLabel);
-    characterDiv.appendChild(gender);
-    characterDiv.appendChild(dobLabel);
-    characterDiv.appendChild(dob);
-    characterDiv.appendChild(lastPlayedLabel);
-    characterDiv.appendChild(lastPlayed);
-    characterDiv.appendChild(playDeleteContainer);
+    charCardButtons.appendChild(playButton);
+    charCardButtons.appendChild(deleteButton);
 
-    playDeleteContainer.appendChild(playButton);
-    playDeleteContainer.appendChild(deleteButton);
+    charCard.appendChild(charCardButtons);
 
-    characterContainer.appendChild(characterDiv);
+    charCards.appendChild(charCard);
+
+    let createCard = document.createElement('create-card');
+    createCard.setAttribute('id', 'create-card-' + value);
+    createCard.classList.add('create-card');
+  });
+
+  if (count < 4) {
+    count++;
+    let value = count;
+
+    let charCard = document.createElement('character-card');
+    charCard.setAttribute('id', 'character-card-' + value);
+    charCard.classList.add('character-card');
+
+    let charCardNew = document.createElement('character-card-new');
+    charCardNew.setAttribute('id', 'character-card-' + value + '-new');
+    charCardNew.classList.add('character-card-new');
+    charCardNew.textContent = 'CREATE';
+
+    charCard.addEventListener('click', () => {
+      window.app.showCreate(value);
+    });
+
+    charCard.appendChild(charCardNew);
+    charCards.appendChild(charCard);
+
+    let createCard = document.createElement('create-card');
+    createCard.setAttribute('id', 'create-card-' + value);
+    createCard.classList.add('create-card');
+
+    let createCardForm = document.createElement('create-card-form');
+    createCardForm.classList.add('create-card-form');
+
+    let createCardFirstNameLabel = document.createElement('firstname-form-label');
+    createCardFirstNameLabel.classList.add('form-label');
+    createCardFirstNameLabel.textContent = 'FIRST NAME';
+
+    let createCardFirstNameForm = document.createElement('input');
+    createCardFirstNameForm.type = "text";
+    createCardFirstNameForm.setAttribute('id', 'firstname-' + value);
+
+    createCardFirstNameForm.addEventListener('change', () => {
+
+    });
+
+    let createCardLastNameLabel = document.createElement('lastname-form-label');
+    createCardLastNameLabel.classList.add('form-label');
+    createCardLastNameLabel.textContent = 'LAST NAME';
+
+    let createCardLastNameForm = document.createElement('input');
+    createCardLastNameForm.type = "text";
+    createCardLastNameForm.setAttribute('id', 'lastname-' + value);
+
+    createCardLastNameForm.addEventListener('change', () => {
+
+    });
+
+    let createCardGenderLabel = document.createElement('gender-form-label');
+    createCardGenderLabel.classList.add('form-label');
+    createCardGenderLabel.textContent = 'GENDER';
+
+
+    let createCardGenderForm = document.createElement('select');
+    createCardGenderForm.setAttribute('id', 'lastname-' + value);
+
+    createCardGenderForm.addEventListener('change', () => {
+
+    });
+
+
+    let genderCount = 0;
+
+    genderMap.forEach((gender) => {
+      let option = document.createElement('option');
+      option.value = genderMap[genderCount];
+      option.textContent = genderMap[genderCount];
+      createCardGenderForm.appendChild(option);
+      genderCount++;
+    });
+
+    let createCardDOBLabel = document.createElement('dob-form-label');
+    createCardDOBLabel.classList.add('form-label');
+    createCardDOBLabel.textContent = 'DATE OF BIRTH';
+
+    let createCardDOBForm = document.createElement('input');
+    createCardDOBForm.type = "text";
+    createCardDOBForm.setAttribute('id', 'dob-' + value);
+
+    createCardDOBForm.addEventListener('change', () => {
+
+    });
+
+    createCardForm.appendChild(createCardFirstNameLabel);
+    createCardForm.appendChild(createCardFirstNameForm);
+    createCardForm.appendChild(createCardLastNameLabel);
+    createCardForm.appendChild(createCardLastNameForm);
+    createCardForm.appendChild(createCardGenderLabel);
+    createCardForm.appendChild(createCardGenderForm);
+    createCardForm.appendChild(createCardDOBLabel);
+    createCardForm.appendChild(createCardDOBForm);
+
+    createCard.appendChild(createCardForm);
+
+    let createCardButtons = document.createElement('create-card-buttons');
+    createCardButtons.classList.add('create-card-buttons');
+
+    let createCardSubmit = document.createElement('create-card-submit');
+    createCardSubmit.setAttribute('id', 'create-card-' + value + '-submit');
+    createCardSubmit.classList.add('create-card-submit');
+    createCardSubmit.textContent = 'SUBMIT';
+
+    let createCardCancel = document.createElement('create-card-cancel');
+    createCardCancel.setAttribute('id', 'create-card-' + value + '-cancel');
+    createCardCancel.classList.add('create-card-cancel');
+    createCardCancel.textContent = 'CANCEL';
+
+    createCardCancel.addEventListener('click', () => {
+      // for (let i = 1; i < 5; i++) {
+      //   let element = document.getElementById('character-card-' + i);
+
+      //   if (element) {
+      //     charCards.removeChild(element);
+      //   }
+      // }
+
+      window.app.cancel();
+    });
+
+    createCardButtons.appendChild(createCardSubmit);
+    createCardButtons.appendChild(createCardCancel);
+
+    createCard.appendChild(createCardButtons);
+
+    createCards.appendChild(createCard);
+  }
+}
+
+async function init() {
+  await generateCards(charData);
+}
+
+window.app.showCreate = (id) => {
+  if (!id) return;
+
+  window.requestAnimationFrame(() => {
+    charCards.style.opacity = `0`;
+
+    setTimeout(() => {
+      charCards.style.visibility = `hidden`;
+      createCards.style.visibility = `visible`;
+      createCards.style.opacity = `1`;
+    }, 100);
   });
 }
 
-// $(document).ready(() => {
-//   fadeInBackground();
-//   // createExistingCards(charData);
-//   createNewCard();
-// });
+window.app.submit = () => {
+  console.log('submit');
+}
 
-window.addEventListener('message', (event) => {
-  switch(event.data.eventName) {
-    case 'uridium_characters:start':
-      fadeInBackground();
-      break;
-    case 'uridium_characters:new':
-      createNewCard();
-      break;
-    case 'uridium_characters:existing':
-      createExistingCards(event.data.charData);
-      break;
-    default:
-      break;
-  };
+window.app.cancel = () => {
+  window.requestAnimationFrame(() => {
+    createCards.style.opacity = `0`;
+
+    setTimeout(() => {
+      createCards.style.visibility = `hidden`;
+      charCards.style.visibility = `visible`;
+      charCards.style.opacity = `1`;
+    }, 100);
+  });
+}
+
+window.app.check = (id) => {
+  if (id === 'dob') {
+
+  } else {
+    console.log(id);
+  }
+}
+
+$(document).ready(() => {
+  init();
 });

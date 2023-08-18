@@ -1,0 +1,103 @@
+:root {
+  /* Blackscreen For Fadeout */
+  --clr-blackscreen: rgba(0, 0, 0, 1.0);
+
+  /* Font Declarations */
+  --character-card-label-font: 'Roboto-Bold';
+  --character-card-field-font: 'Roboto-Bold';
+  --create-card-form-label-font: 'Roboto-Bold';
+  --create-card-form-input-font: 'Roboto-Bold';
+  --create-card-form-select-font: 'Roboto-Bold';
+
+  /* Character Card Label Color */
+  --clr-character-card-label: rgba(155, 155, 155, 0.9);
+
+  /* Character + Create Card Border Colors */
+  --clr-card-1-border: 1px solid rgba(255, 0, 255, 0.9);
+  --clr-card-2-border: 1px solid rgba(255, 255, 0, 0.9);
+  --clr-card-3-border: 1px solid rgba(255, 100, 0, 0.9);
+  --clr-card-4-border: 1px solid rgba(0, 255, 255, 0.9);
+
+  /* Character + Create Card Text Colors */
+  --clr-card-1-field: rgba(255, 0, 255, 0.9);
+  --clr-card-2-field: rgba(255, 255, 0, 0.9);
+  --clr-card-3-field: rgba(255, 100, 0, 0.9);
+  --clr-card-4-field: rgba(0, 255, 255, 0.9);
+
+  /* Character + Create Card Backgrounds */
+  --clr-card-1-bg: rgba(20, 0, 20, 0.9);
+  --clr-card-2-bg: rgba(20, 20, 0, 0.9);
+  --clr-card-3-bg: rgba(20, 10, 0, 0.9);
+  --clr-card-4-bg: rgba(0, 20, 20, 0.9);
+
+  /* Character Card Button Colors */
+  --clr-play-button-1: rgba(0, 155, 0, 0.9);
+  --clr-play-button-1-hover: rgba(0, 205, 0, 0.9);
+  --clr-play-button-1-active: rgba(0, 255, 0, 0.9);
+  --clr-play-button-2: rgba(0, 155, 0, 0.9);
+  --clr-play-button-2-hover: rgba(0, 205, 0, 0.9);
+  --clr-play-button-2-active: rgba(0, 255, 0, 0.9);
+  --clr-play-button-3: rgba(0, 155, 0, 0.9);
+  --clr-play-button-3-hover: rgba(0, 205, 0, 0.9);
+  --clr-play-button-3-active: rgba(0, 255, 0, 0.9);
+  --clr-play-button-4: rgba(0, 155, 0, 0.9);
+  --clr-play-button-4-hover: rgba(0, 205, 0, 0.9);
+  --clr-play-button-4-active: rgba(0, 255, 0, 0.9);
+  --clr-delete-button-1: rgba(155, 0, 0, 0.9);
+  --clr-delete-button-1-hover: rgba(205, 0, 0, 0.9);
+  --clr-delete-button-1-active: rgba(255, 0, 0, 0.9);
+  --clr-delete-button-2: rgba(155, 0, 0, 0.9);
+  --clr-delete-button-2-hover: rgba(205, 0, 0, 0.9);
+  --clr-delete-button-2-active: rgba(255, 0, 0, 0.9);
+  --clr-delete-button-3: rgba(155, 0, 0, 0.9);
+  --clr-delete-button-3-hover: rgba(205, 0, 0, 0.9);
+  --clr-delete-button-3-active: rgba(255, 0, 0, 0.9);
+  --clr-delete-button-4: rgba(155, 0, 0, 0.9);
+  --clr-delete-button-4-hover: rgba(205, 0, 0, 0.9);
+  --clr-delete-button-4-active: rgba(255, 0, 0, 0.9);
+
+  /* Character Card New Button Colors */
+  --clr-card-1-new: rgba(155, 0, 155, 0.9);
+  --clr-card-1-new-hover: rgba(205, 0, 205, 0.9);
+  --clr-card-1-new-active: rgba(255, 0, 255, 0.9);
+  --clr-card-2-new: rgba(155, 155, 0, 0.9);
+  --clr-card-2-new-hover: rgba(205, 205, 0, 0.9);
+  --clr-card-2-new-active: rgba(255, 255, 0, 0.9);
+  --clr-card-3-new: rgba(155, 50, 0, 0.9);
+  --clr-card-3-new-hover: rgba(205, 75, 0, 0.9);
+  --clr-card-3-new-active: rgba(255, 100, 0, 0.9);
+  --clr-card-4-new: rgba(0, 155, 155, 0.9);
+  --clr-card-4-new-hover: rgba(0, 205, 205, 0.9);
+  --clr-card-4-new-active: rgba(0, 255, 255, 0.9);
+
+  
+  /* Create Card Input */
+  --clr-create-card-form-label: rgba(150, 150, 150, 0.9);
+  --clr-create-card-input-bg: rgba(10, 10, 10, 0.9);
+
+  /* Create Card Button Colors */
+  --clr-create-card-1-submit: rgba(0, 155, 0, 0.9);
+  --clr-create-card-1-submit-hover: rgba(0, 205, 0, 0.9);
+  --clr-create-card-1-submit-active: rgba(0, 255, 0, 0.9);
+  --clr-create-card-2-submit: rgba(0, 155, 0, 0.9);
+  --clr-create-card-2-submit-hover: rgba(0, 205, 0, 0.9);
+  --clr-create-card-2-submit-active: rgba(0, 255, 0, 0.9);
+  --clr-create-card-3-submit: rgba(0, 155, 0, 0.9);
+  --clr-create-card-3-submit-hover: rgba(0, 205, 0, 0.9);
+  --clr-create-card-3-submit-active: rgba(0, 255, 0, 0.9);
+  --clr-create-card-4-submit: rgba(0, 155, 0, 0.9);
+  --clr-create-card-4-submit-hover: rgba(0, 205, 0, 0.9);
+  --clr-create-card-4-submit-active: rgba(0, 255, 0, 0.9);
+  --clr-create-card-1-cancel: rgba(155, 0, 0, 0.9);
+  --clr-create-card-1-cancel-hover: rgba(205, 0, 0, 0.9);
+  --clr-create-card-1-cancel-active: rgba(255, 0, 0, 0.9);
+  --clr-create-card-2-cancel: rgba(155, 0, 0, 0.9);
+  --clr-create-card-2-cancel-hover: rgba(205, 0, 0, 0.9);
+  --clr-create-card-2-cancel-active: rgba(255, 0, 0, 0.9);
+  --clr-create-card-3-cancel: rgba(155, 0, 0, 0.9);
+  --clr-create-card-3-cancel-hover: rgba(205, 0, 0, 0.9);
+  --clr-create-card-3-cancel-active: rgba(255, 0, 0, 0.9);
+  --clr-create-card-4-cancel: rgba(155, 0, 0, 0.9);
+  --clr-create-card-4-cancel-hover: rgba(205, 0, 0, 0.9);
+  --clr-create-card-4-cancel-active: rgba(255, 0, 0, 0.9);
+}

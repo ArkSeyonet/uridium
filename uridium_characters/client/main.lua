@@ -65,5 +65,6 @@ local function init()
 end
 
 RegisterNetEvent('uridium_characters:start', function()
+  SendNUIMessage({ eventName = 'uridium_characters:init', locale = GetConvar("locale", "en-US") })
   init()
 end)
